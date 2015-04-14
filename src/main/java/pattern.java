@@ -149,7 +149,15 @@ public class pattern extends JFrame{
 
         public void run() {
             while (true) {
-                checkout();
+                if (power < 2)  {
+                    try{
+                        JOptionPane.showMessageDialog(null,"No Power!!!" , "" , JOptionPane.ERROR_MESSAGE);
+                        Thread.sleep(3000);
+                        System.exit(0);
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 patternPower.setText("电量:" + power + "%");
                 power--;
                 try {
@@ -164,12 +172,6 @@ public class pattern extends JFrame{
             power = 100;
         }
 
-        public int checkout() {
-            if (power == 0) {
-                return -1;
-            }
-            return 1;
-        }
     }
 
     public class bloodSuger  extends Thread{
@@ -206,6 +208,15 @@ public class pattern extends JFrame{
                     continue;
                 }
                 else {
+                    if( allInsulin < 2 ) {
+                        try {
+                            JOptionPane.showMessageDialog(null, "No Insulin!!!", "", JOptionPane.ERROR_MESSAGE);
+                            Thread.sleep(3000);
+                            System.exit(0);
+                        }catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     if ( bloodSugerCon >= 180 ) {
                         suggest.setText("需要就医");
                     }
